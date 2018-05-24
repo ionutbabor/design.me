@@ -3197,3 +3197,19 @@ TYPOGRAPHY MEDIA QUERIES
   font-size:16px;
   color: $colorPrimary;
 }
+
+/*my code*/
+#CartContainer{
+    .cart__checkout{
+      background-color: $btnbackColor;
+      color: {{settings.btn_primary_text_color}};
+
+      &:hover {
+        background-color: $colorBtnPrimaryHover;
+        color: $colorBtnPrimaryText !important;
+
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+      }
+    }
+  }

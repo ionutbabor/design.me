@@ -41,30 +41,30 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" rel="stylesheet">
   <!--[if IE 9 ]>
   {{ 'theme-IE.scss.css' | asset_url | stylesheet_tag }} 
-  <![endif]-->
+<![endif]-->
 
-  <!-- Extension CSS ================================================== -->
-  {{ 'plugins.scss.css' | asset_url | stylesheet_tag }}
+<!-- Extension CSS ================================================== -->
+{{ 'plugins.scss.css' | asset_url | stylesheet_tag }}
 
-  <!-- THEME JS INIT -->  
- 
-  {{ 'theme.js' | asset_url | script_tag }}
- 
+<!-- THEME JS INIT -->  
+
+{{ 'theme.js' | asset_url | script_tag }}
+
   <!--[if IE 9]>
   <script type="text/javascript">
   !function(r){function e(r,e,n,t,o,u){for(var a=0,c=0,f=(r=String(r)).length,d="",i=0;c<f;){var h=r.charCodeAt(c);for(a=(a<<o)+(h=h<256?n[h]:-1),i+=o;i>=u;){var C=a>>(i-=u);d+=t.charAt(C),a^=C<<i}++c}return!e&&i>0&&(d+=t.charAt(a<<u-i)),d}for(var n="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",t="",o=[256],u=[256],a=0,c={encode:function(r){return r.replace(/[\u0080-\u07ff]/g,function(r){var e=r.charCodeAt(0);return String.fromCharCode(192|e>>6,128|63&e)}).replace(/[\u0800-\uffff]/g,function(r){var e=r.charCodeAt(0);return String.fromCharCode(224|e>>12,128|e>>6&63,128|63&e)})},decode:function(r){return r.replace(/[\u00e0-\u00ef][\u0080-\u00bf][\u0080-\u00bf]/g,function(r){var e=(15&r.charCodeAt(0))<<12|(63&r.charCodeAt(1))<<6|63&r.charCodeAt(2);return String.fromCharCode(e)}).replace(/[\u00c0-\u00df][\u0080-\u00bf]/g,function(r){var e=(31&r.charCodeAt(0))<<6|63&r.charCodeAt(1);return String.fromCharCode(e)})}};a<256;){var f=String.fromCharCode(a);t+=f,u[a]=a,o[a]=n.indexOf(f),++a}var d=r.base64=function(r,e,n){return e?d[r](e,n):r?null:this};d.btoa=d.encode=function(r,t){return r=!1===d.raw||d.utf8encode||t?c.encode(r):r,(r=e(r,!1,u,n,8,6))+"====".slice(r.length%4||4)},d.atob=d.decode=function(r,n){var u=(r=String(r).split("=")).length;do{r[--u]=e(r[u],!0,o,t,6,8)}while(u>0);return r=r.join(""),!1===d.raw||d.utf8decode||n?c.decode(r):r}}(jQuery);
   var btoa = function (str) {return jQuery.base64.encode(str);};
   </script>
-  <![endif]-->
-  <script>
-    theme.Currency.moneyFormat = '{{ shop.money_format | strip_html}}';
-  </script>
+<![endif]-->
+<script>
+  theme.Currency.moneyFormat = '{{ shop.money_format | strip_html}}';
+</script>
 
-  {{ content_for_header }}
+{{ content_for_header }}
 
 
-  <!-- Header hook for plugins ================================================== -->
-  {% include 'oldIE-js' %}
+<!-- Header hook for plugins ================================================== -->
+{% include 'oldIE-js' %}
 
   {% comment %}
   If you store has customer accounts disabled, you can remove the following JS file
@@ -79,6 +79,25 @@
 </head>
 
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+
+  {% comment %}my code{% endcomment %}
+  <div class="content-lights"></div>
+  <div id="CartDrawer" class="drawer drawer--right">
+    <div class="drawer__header">
+      <div class="drawer__title h3">{{ 'cart.general.title' | t }}</div>
+      {% comment %}<div class="ajax-cart-block__title drawer__title h3"><span id="CartCount">{{ cart.item_count }}</span> ITEMS IN YOUR CART</div>{% endcomment %}
+      <div class="drawer__close js-drawer-close">
+        <button type="button" class="icon-fallback-text">
+          <span class="icon icon-x" aria-hidden="true"></span>
+          <span class="fallback-text">{{ 'cart.general.close_cart' | t | json }}</span>
+        </button>
+      </div>
+    </div>
+    <div id="CartContainer">
+    </div>
+  </div>
+
+
   {% section 'header' %}
 
   <div id="PageContainer" class="is-moved-by-drawer">
@@ -89,6 +108,7 @@
   </div>
 
   {% section 'footer' %}
+
 
   {% comment %}
   Template-specific js
@@ -105,6 +125,30 @@
   </script>
 
   {% include 'newsletter-modal' %}
+
+
+  {{ 'timber.js' | asset_url | script_tag }}
+
+  {{ 'handlebars.min.js' | asset_url | script_tag }}
+  {% include 'ajax-cart-template' %}
+  {{ 'ajax-cart.js' | asset_url | script_tag }}
+
+  <script>
+    jQuery(function($) {
+      ajaxCart.init({
+        formSelector: '#AddToCartForm',
+        cartContainer: '#CartContainer',
+        addToCartSelector: '#AddToCart',
+        cartCountSelector: '.cart-item-count',
+        moneyFormat: {{ shop.money_format | json }}
+      });
+    });
+
+    jQuery('body').on('afterCartLoad.ajaxCart', function(evt, cart) {
+  // Bind to 'afterCartLoad.ajaxCart' to run any javascript after the cart has loaded in the DOM
+  timber.RightDrawer.open();
+});
+</script>
 
 </body>
 </html>

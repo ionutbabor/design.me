@@ -2263,6 +2263,7 @@ theme.ProductPage = (function () {
             $('body').on(theme.AjaxCart.eventStrs.addToCartSuccess, function () {
                 self._displayCartSuccess();
                 self._updateCartCount();
+				//$('#CartDrawer').css({"right":"0", "display":"block"});
             });
             $('body').on(theme.AjaxCart.eventStrs.addToCartError, function () {
                 self._displayCartError('There was a problem adding the product to the cart. Make sure your selection is correct and try again.');

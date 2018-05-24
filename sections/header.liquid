@@ -385,7 +385,7 @@ color: {{ settings.promo_text_link }};
 
   
 
-  <a class="cart-wrapper js-cart-icon" href="/cart">
+  <a class="cart-wrapper js-cart-icon js-drawer-open-right" href="/cart">
     <div id="cart-svg-count" class="cart-item-count{%if cart.item_count > 0%} cart-show{%endif%}{%if cart.item_count > 9%} cart-extra-pad{%endif%}">{{cart.item_count}}</div>
     <svg id="cart-svg" {% if cart.item_count > 0%} color="{{ settings.color_accent}}" stroke="{{ settings.color_accent}}" {% else %} color="{{ settings.navbar_link_color}}" stroke="{{ settings.navbar_link_color}}"{%endif%} width="30" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <metadata>image/svg+xml</metadata>   
