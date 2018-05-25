@@ -147,6 +147,7 @@
     jQuery('body').on('afterCartLoad.ajaxCart', function(evt, cart) {
   // Bind to 'afterCartLoad.ajaxCart' to run any javascript after the cart has loaded in the DOM
   timber.RightDrawer.open();
+  $('#cart-svg-count').addClass(" cart-show");
 });
 </script>
 

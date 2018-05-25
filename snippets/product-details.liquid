@@ -26,7 +26,7 @@
   </div>
     <div class=" {% if section.settings.enable_payment_button%}smart-wrapper{%endif%} product-smart-wrapper" {%if sold_out %}style="display:none"{%endif%}>
 
-      <button role="button" tabindex="0" id="AddToCartX" class="add-to-cart-btn {% if top_mobile_buttons and section.settings.enable_payment_button == false %}medium-down--hide {% else %} mobile-inline-btn{% endif %} js-prod-show-available {% if section.settings.use_ajax_cart %}js-prod-ajax-btn{% else %}js-prod-form-btn{% endif %}" id="AddToCartDesk" {%if sold_out %}style="display:none"{%endif%}>
+      <button role="button" tabindex="0" class="add-to-cart-btn {% if top_mobile_buttons and section.settings.enable_payment_button == false %}medium-down--hide {% else %} mobile-inline-btn{% endif %} js-prod-show-available {% if section.settings.use_ajax_cart %}js-prod-ajax-btn{% else %}js-prod-form-btn{% endif %}" id="AddToCartDesk" {%if sold_out %}style="display:none"{%endif%}>
         <span class="btn cart-error">{{ 'products.product.cart_add_error' | t }}</span>
         <span class="btn cart-normal">{{ 'products.product.add_to_cart' | t }}</span>
         <span class="btn cart-success">{{ 'products.product.cart_add_success' | t }} {{ 'icon-tick.svg' | asset_url | img_tag }}</span>

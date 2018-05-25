@@ -324,9 +324,20 @@ Check if the product is on sale and set a variable to be used below.
                   <label for="Quantity" class="quantity-selector">{{ 'products.product.quantity' | t }}</label>
                   <input type="number" id="Quantity" name="quantity" value="1" min="1" class="quantity-selector">
 
-                  <button type="submit" name="add" id="AddToCart" class="btn">
-                    <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
+                  <button type="submit" name="add" id="AddToCart" class="add-to-cart-btn js-prod-form-btn">
+                    <span class="btn cart-error">{{ 'products.product.cart_add_error' | t }}</span>
+        <span class="btn cart-normal">{{ 'products.product.add_to_cart' | t }}</span>
+        <span class="btn cart-success">{{ 'products.product.cart_add_success' | t }} {{ 'icon-tick.svg' | asset_url | img_tag }}</span>
+                    {% comment %}<span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>{% endcomment %}
                   </button>
+
+                  {% comment %}<button role="button" tabindex="0" class="add-to-cart-btn {% if top_mobile_buttons and section.settings.enable_payment_button == false %}medium-down--hide {% else %} mobile-inline-btn{% endif %} js-prod-show-available {% if section.settings.use_ajax_cart %}js-prod-ajax-btn{% else %}js-prod-form-btn{% endif %}" id="AddToCart" {%if sold_out %}style="display:none"{%endif%}>
+        <span class="btn cart-error">{{ 'products.product.cart_add_error' | t }}</span>
+        <span class="btn cart-normal">{{ 'products.product.add_to_cart' | t }}</span>
+        <span class="btn cart-success">{{ 'products.product.cart_add_success' | t }} {{ 'icon-tick.svg' | asset_url | img_tag }}</span>
+      </button>{% endcomment %}
+
+
                 </form>
 
 

@@ -21,11 +21,18 @@ $drawerCartWidth: 300px;
   transition: opacity 0.45s ease;
   z-index: 900;
 }
-.js-drawer-open .content-lights {
-  right: 0;
-  left: 0;
-  opacity: 1;
+.js-drawer-open {
+  .content-lights {
+    right: 0;
+    left: 0;
+    opacity: 1;
+  }
 }
+.cart-wrapper .cart-item-count.hidden-count{
+  display: none;
+}
+
+
 
 /*============================================================================
   #Ajax Cart Styles (conditionally loaded)
